@@ -13,13 +13,16 @@
 <template name="myGallery">
   <div class="row">
   {{#each allImages}}
-   <div class="col-4 uniform">
+   <div class="col-4 uniform" id={{_id}}>
        <img class="pic" src="{{path}}" alt="">
-       <h2>{{title}}<i class="fas fa-trash icolor"></i></h2>
+       <i class="fa fa-trash icolor js-delete"></i>
+       <h2>{{title}}</h2>
        <h3>{{desc}}</h3>
      </div>
     {{/each}}
     </div>
  </template>
+
+ 
 
 

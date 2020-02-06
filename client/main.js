@@ -12,16 +12,23 @@ import '../lib/collection.js';
   // counter starts at 0
   //this.counter = new ReactiveVar(0);
 //});
-
+ // increment the counter when button is clicked
+   // instance.counter.set(instance.counter.get() + 1
+  // );
 Template.myGallery.helpers({
  allImages(){
  	return imagesdb.find();
  },
 });
 
-//Template.hello.events({
-  //'click button'(event, instance) {
-    // increment the counter when button is clicked
-   // instance.counter.set(instance.counter.get() + 1);
-  //},
-//});
+Template.myGallery.events({
+  'click .js-delete'(event, instance)  {
+  	varmyID= this._id;
+ 	$("#"+this._id).fadeOut('slow',function(){
+ 		imagesdb.remove(myId)});
+ 	console.log(myId);
+ 	
+ 	// console.log("deleting..."+);
+ 	// console.log(this._id);
+  },
+});
