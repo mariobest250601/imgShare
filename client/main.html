@@ -12,6 +12,7 @@
       </div>
     </div>
     {{>addImage}}
+    {{>edit}}
     {{>myGallery}}
 
   </div>
@@ -22,6 +23,7 @@
   {{#each allImages}}
    <div class="col-4 uniform" id={{_id}}>
        <img class="pic" src="{{path}}" alt="">
+       <i class="fa fa-pencil js-edit tcolor"></i>
        <i class="fa fa-trash icolor js-delete"></i>
        <h2>{{title}}</h2>
        <h3>{{desc}}</h3>
@@ -30,59 +32,124 @@
     </div>
  </template>
 
- <template name="addImage">
-   <!-- Button trigger modal -->
-<div class="row mb-5 ">
-  <div class="col text-center">
-    <button type="button" class="btn btn-primary js-Show" data-toggle="modal" data-target="#imgModal">
-      Add Image
-    </button> 
-
-<!-- Modal -->
-<div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" >Title</span>
-                </div>
-                <input type="text" id="Title" class="form-control" placeholder="Tile" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <!-- Tile -->
-
-                <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" >Path</span>
-                </div>
-                <input type="text"  id="Path" class="form-control" placeholder="Image Path" aria-label="Username" aria-describedby="basic-addon1">
-            </div> 
-            <!-- path -->
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Description</span>
-              </div>
-              <textarea class="form-control" id=" Desc" aria-label="With textarea"></textarea>
-            </div>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary js-close" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary js-saveImage">Save changes</button>
+<template name="addImage">
+    <!-- Button trigger modal -->
+    <div class="row text-center mb-5">
+      <div class="col">
+          <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#imgModal">
+            Add Image
+          </button>
       </div>
     </div>
-  </div>
-</div>
-  </div>
-</div>
- </template>
+
+
+
+<!--  For Adding Modal -->
+      <div class="modal fade" id="imgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <img class="placeholder" src="placeholder.jpg" alt="">
+                  
+                 <!--  tile input box -->
+                  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">Title</span>
+                        </div>
+                        <input type="text" class="form-control" id="Title" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                  </div> 
+
+                  <!--  path input box -->
+                  <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">Path</span>
+                        </div>
+                        <input type="text" class="form-control" id="Path" placeholder="Path" aria-label="Path" aria-describedby="basic-addon1">
+                  </div> 
+                  
+                  <!-- description input box -->
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Description</span>
+                    </div>
+                    <textarea class="form-control" id="Desc" aria-label="Description"></textarea>
+                  </div>
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary js-close" data-dismiss="modal">Close
+              </button>
+              <button type="button" class="btn btn-primary js-saveImage">
+              Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</template> 
+
+<template name="edit">
+          
+          
+        <!--  For edit Modal -->
+        <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+               
+              </div>
+              <div class="modal-body">
+
+                <img class="editplaceholder" src="placeholder.jpg" alt="">
+                    
+                   <!--  edittile input box -->
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Title</span>
+                          </div>
+                          <input type="text" class="form-control" id="editTitle" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                    </div> 
+
+                    <!--  editpath input box -->
+                    <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Path</span>
+                          </div>
+                          <input type="text" class="form-control" id="editPath" placeholder="Path" aria-label="editPath" aria-describedby="basic-addon1">
+                    </div> 
+                    
+                    <!-- editdescription input box -->
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Description</span>
+                      </div>
+                      <textarea class="form-control" id="editDesc" aria-label="Description"></textarea>
+                    </div>
+
+                  <input id="editId" type="text">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary js-close" data-dismiss="modal">Close
+                </button>
+                <button type="button" class="btn btn-primary js-UpdateImage">
+                Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+</template>     
 
 
