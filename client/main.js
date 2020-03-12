@@ -17,9 +17,23 @@ import '../lib/collection.js';
 	// );
 Template.myGallery.helpers({
  allImages(){
-	return imagesdb.find();
+ 	var prevtime= newDate().getTime()- 15000;
+ 	var results = imagesdb.find({createdOn: {$gte:prevtime}}).count();
+ 	if (results>0){
+ 		
+ 		return imagesdb.find({},{sort:{createdOn:-1,rating:-1}});
+ 		//sort accroding to time then rating
+ 	}
+ 	else
+		return imagesdb.find({},{sort:{rating:-1,createdOn:-1}});
+ 
+ 		//sort accroding to rating 
  },
 });
+
+
+
+    
 
 Template.myGallery.events({
 	'click .js-delete'(event, instance)  {
@@ -43,7 +57,22 @@ Template.myGallery.events({
 		$("#editDesc").val(eDesc);
 		$(".editplaceholder").attr("src",ePath);
 		
-	}
+	},
+
+	'click .rating'(event) {
+		var UpdatedID = this.picid;
+
+        const value = $(event.target).val();
+        console.log(UpdatedID+" : "+value);
+        imagesdb.update({_id: UpdatedID}, 
+				{$set: {
+				"rating":value,
+				
+				}}
+			);
+
+        
+    }
 });	
 
 
@@ -59,11 +88,13 @@ Template.addImage.events({
 		var theTitle= $("#Title").val();
 		var thePath= $ ("#Path").val();
 		var theDesc= $ ("#Desc").val();
+
 		// console.log("saving Image with title: "+theTitle+"and its path is: "+thePath+"and its description "+theDesc);
 		imagesdb.insert({
    		"path": thePath,
    		"title": theTitle,
-   		"desc": theDesc	
+   		"desc": theDesc,	
+   		"createdOn": new Date().getTime()
    	  });
 		// saving and closing modal
 		console.log("saving...");
